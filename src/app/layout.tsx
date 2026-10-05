@@ -19,6 +19,8 @@ const notoSansJP = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: "Ryuta Mukai | Web Designer",
   description: "Web Designer based in Yokohama",
+  // 検索結果に出さない（URLを知っている人だけが見る）
+  robots: { index: false, follow: false },
 };
 
 export default function RootLayout({
