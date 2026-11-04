@@ -62,6 +62,8 @@ export const GlobalHeader = () => {
           onClick={toggleMenu}
           className="md:hidden relative w-8 h-8 flex flex-col justify-center items-center gap-[6px] z-50 group"
           aria-label="Menu"
+          aria-expanded={isOpen}
+          aria-controls="sp-menu"
         >
           {/* 上の線 */}
           <span
@@ -80,6 +82,7 @@ export const GlobalHeader = () => {
 
       {/* Fullscreen Modal Menu (SP Only) */}
       <div
+        id="sp-menu"
         className={`md:hidden fixed inset-0 z-40 flex flex-col justify-center items-center transition-all duration-500 ${
           isOpen
             ? "opacity-100 visible backdrop-blur-md bg-[#1A1A1A]/80"
