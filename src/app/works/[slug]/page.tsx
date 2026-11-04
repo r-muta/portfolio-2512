@@ -17,13 +17,13 @@ const SingleContentBlock = ({ block, headerMbClass }: { block: ContentBlock, hea
   return (
     <div className="flex flex-col gap-4">
       {block.title && (
-         <h4 className={`text-[16px] md:text-[20px] leading-[1.3] tracking-[0.02em] font-medium`}>
+         <h3 className={`text-[16px] md:text-[20px] leading-[1.3] tracking-[0.02em] font-medium`}>
            {block.title}
-         </h4>
+         </h3>
       )}
       {block.imageUrl && (
         <div className="mt-1 md:mb-2">
-          <img src={block.imageUrl} alt={block.title || "Image"} className="w-full h-auto rounded-[8px] md:rounded-[12px] object-cover" />
+          <img src={block.imageUrl} alt={block.title || ""} loading="lazy" decoding="async" className="w-full h-auto rounded-[8px] md:rounded-[12px] object-cover" />
         </div>
       )}
       <p className="text-[14px] md:text-[18px] leading-[2.0] tracking-[0.02em] opacity-75 whitespace-pre-wrap">
@@ -41,13 +41,13 @@ const MultiContentBlocks = ({ blocks, headerMbClass }: { blocks: ContentBlock[],
       {blocks.map((block, idx) => (
         <div key={idx} className="flex flex-col gap-4">
           {block.title && (
-             <h4 className={`text-[16px] md:text-[20px] leading-[1.3] tracking-[0.02em] font-medium`}>
+             <h3 className={`text-[16px] md:text-[20px] leading-[1.3] tracking-[0.02em] font-medium`}>
                {block.title}
-             </h4>
+             </h3>
           )}
           {block.imageUrl && (
             <div className="mt-1 md:mb-2">
-              <img src={block.imageUrl} alt={block.title || "Image"} className="w-full h-auto rounded-[8px] md:rounded-[12px] object-cover" />
+              <img src={block.imageUrl} alt={block.title || ""} loading="lazy" decoding="async" className="w-full h-auto rounded-[8px] md:rounded-[12px] object-cover" />
             </div>
           )}
           <p className="text-[14px] md:text-[18px] leading-[2.0] tracking-[0.02em] opacity-75 whitespace-pre-wrap">
@@ -172,6 +172,7 @@ export default function WorkDetail() {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         className="shrink-0"
+                        aria-hidden="true"
                       >
                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                         <polyline points="15 3 21 3 21 9" />
@@ -206,7 +207,7 @@ export default function WorkDetail() {
 
             <div className="mt-[24px] md:mt-[40px] w-full">
                {currentWork.thumbnail && (
-                  <img src={currentWork.thumbnail} alt="Main Visual" className="block w-full aspect-[16/10] object-cover rounded-[8px] md:rounded-[12px]" />
+                  <img src={currentWork.thumbnail} alt={`${currentWork.title} のメインビジュアル`} className="block w-full aspect-[16/10] object-cover rounded-[8px] md:rounded-[12px]" />
                )}
             </div>
           </section>
@@ -217,20 +218,20 @@ export default function WorkDetail() {
               <div className="max-w-[720px] mx-auto">
                 {currentWork.desc.overview && (
                   <div className="mb-3 md:mb-5">
-                     <h3 className={`font-inter text-[12px] md:text-[14px] leading-none tracking-[-0.01em] opacity-40 ${headerMbClass}`}>Overview</h3>
+                     <h2 className={`font-inter text-[12px] md:text-[14px] leading-none tracking-[-0.01em] opacity-40 ${headerMbClass}`}>Overview</h2>
                      <p className="text-[14px] md:text-[18px] leading-[2.0] tracking-[0.02em] opacity-75 whitespace-pre-wrap">{currentWork.desc.overview}</p>
                   </div>
                 )}
                 {summary && (
                   <div className="flex flex-col gap-6 md:gap-10 pt-3 md:pt-5">
                     {hasBackground && summary.background && (
-                      <div><h3 className={`font-inter text-[12px] md:text-[14px] opacity-40 ${headerMbClass}`}>Background</h3><SingleContentBlock block={summary.background} headerMbClass={headerMbClass} /></div>
+                      <div><h2 className={`font-inter text-[12px] md:text-[14px] opacity-40 ${headerMbClass}`}>Background</h2><SingleContentBlock block={summary.background} headerMbClass={headerMbClass} /></div>
                     )}
                     {hasSolution && summary.solution && (
-                      <div><h3 className={`font-inter text-[12px] md:text-[14px] opacity-40 ${headerMbClass}`}>Solution</h3><SingleContentBlock block={summary.solution} headerMbClass={headerMbClass} /></div>
+                      <div><h2 className={`font-inter text-[12px] md:text-[14px] opacity-40 ${headerMbClass}`}>Solution</h2><SingleContentBlock block={summary.solution} headerMbClass={headerMbClass} /></div>
                     )}
                     {hasResult && summary.result && (
-                      <div><h3 className={`font-inter text-[12px] md:text-[14px] opacity-40 ${headerMbClass}`}>Result</h3><SingleContentBlock block={summary.result} headerMbClass={headerMbClass} /></div>
+                      <div><h2 className={`font-inter text-[12px] md:text-[14px] opacity-40 ${headerMbClass}`}>Result</h2><SingleContentBlock block={summary.result} headerMbClass={headerMbClass} /></div>
                     )}
                   </div>
                 )}
@@ -242,7 +243,7 @@ export default function WorkDetail() {
           {showIdeaBox && (
             <section className={`${cardClass} ${cardPaddingClass} ${gridGapClass} font-noto`}>
               <div className="max-w-[720px] mx-auto">
-                <h3 className={`font-inter text-[12px] md:text-[14px] leading-none tracking-[-0.01em] opacity-40 mb-3 md:mb-3`}>Process</h3>
+                <h2 className={`font-inter text-[12px] md:text-[14px] leading-none tracking-[-0.01em] opacity-40 mb-3 md:mb-3`}>Process</h2>
                 {sections && <MultiContentBlocks blocks={sections} headerMbClass={headerMbClass} />}
               </div>
             </section>
@@ -253,7 +254,7 @@ export default function WorkDetail() {
             <section className={`${cardClass} ${cardPaddingClass} ${gridGapClass}`}>
                <div className="flex flex-col gap-[24px] md:gap-[40px]">
                  {currentWork.images.slice(1, 6).map((imgUrl, idx) => (
-                   <img key={idx} src={imgUrl} alt={`Gallery ${idx + 1}`} className="w-full h-auto rounded-[8px] md:rounded-[12px]" />
+                   <img key={idx} src={imgUrl} alt={`${currentWork.title} ギャラリー画像 ${idx + 1}`} loading="lazy" decoding="async" className="w-full h-auto rounded-[8px] md:rounded-[12px]" />
                  ))}
                </div>
             </section>
@@ -262,7 +263,7 @@ export default function WorkDetail() {
           {/* 5. Tools Section */}
           <section className={`${cardClass} ${cardPaddingClass} ${gridGapClass}`}>
             <div className="max-w-[720px] mx-auto">
-               <h3 className="font-inter text-[12px] md:text-[14px] leading-none tracking-[-0.01em] opacity-40 mb-4">Tools</h3>
+               <h2 className="font-inter text-[12px] md:text-[14px] leading-none tracking-[-0.01em] opacity-40 mb-4">Tools</h2>
                <p className="font-inter text-[12px] md:text-[14px] leading-[1.6] tracking-[0.02em] opacity-75">
                  {currentWork.tools.join(" / ")}
                </p>

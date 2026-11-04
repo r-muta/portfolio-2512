@@ -93,7 +93,7 @@ export default function ProfilePage() {
           <section className={`${cardClass} ${cardPaddingClass} ${gridGapClass}`}>
             
             <div className="w-full aspect-[16/9] rounded-[8px] md:rounded-[12px] overflow-hidden mb-[24px] md:mb-[40px]">
-              <img src="/images/2026portfolio_profile_2_1.png" alt="RYUTA MUKAI Profile" className="w-full h-full object-cover"/>
+              <img src="/images/2026portfolio_profile_2_1.png" alt="白いオフィスチェアに座り、デスクのモニターに向かって作業する向井龍太" className="w-full h-full object-cover"/>
             </div>
 
             <div className="mb-[16px]">
@@ -109,7 +109,7 @@ export default function ProfilePage() {
             </div>
 
             <div className="mt-8">
-              <span className={TEXT_STYLES.LABEL}>Profile</span>
+              <h2 className={TEXT_STYLES.LABEL}>Profile</h2>
               <div className={TEXT_STYLES.BODY}>
                 <p>
                   2000年生まれ、千葉県出身、横浜暮らし。<br />複雑な課題をシンプルに整理し、受け取り手にとって心地よい形で届ける。それが私の考えるデザインです。余白を大切にした暮らしの中で感性を磨き、クライアントの想いや価値を、最も伝わる形に翻訳する制作を続けています。
@@ -120,7 +120,7 @@ export default function ProfilePage() {
 
           {/* 1.5. Career */}
           <section className={`${cardClass} ${cardPaddingClass} ${gridGapClass}`}>
-            <span className={TEXT_STYLES.LABEL}>Career</span>
+            <h2 className={TEXT_STYLES.LABEL}>Career</h2>
             <div className={TEXT_STYLES.BODY}>
               <p>
                 エンジニア出身のWebデザイナー。<br />大学時代からSNS・ブログで情報をわかりやすく届ける発信を続ける中で、「伝え方」次第で届き方が変わるデザインの力を実感し、この道へ。ShopifyによるEC構築からStudioでのブランドサイト制作まで対応。SNS総フォロワー5万人・Yahoo!ニュース エキスパート年間1,200万PVの発信経験を持ち、「作る」だけでなく「届ける」までを見据えた制作を行っています。
@@ -136,7 +136,7 @@ export default function ProfilePage() {
                 <h2 className={`${TEXT_STYLES.CARD_TITLE} mb-6 whitespace-nowrap`}>暮らしの記録、ムタログ。</h2>
 
                 <div className="w-full rounded-[8px] md:rounded-[12px] overflow-hidden mb-6">
-                  <img src="/images/Personal-Media_img.png" alt="mutalog" className="w-full h-auto object-cover" />
+                  <img src="/images/Personal-Media_img.png" alt="Instagramアカウント「ムタログ｜無印マニアのお部屋」（@mutalog_muji）のプロフィールと投稿一覧" loading="lazy" decoding="async" className="w-full h-auto object-cover" />
                 </div>
 
                 <div className={`${TEXT_STYLES.BODY} mb-6`}>
@@ -163,9 +163,9 @@ export default function ProfilePage() {
           {/* 3. Identity */}
           <section className={`${cardClass} ${cardPaddingClass} ${gridGapClass}`}>
             <div className="mb-6">
-              <span className={TEXT_STYLES.LABEL}>
+              <h2 className={TEXT_STYLES.LABEL}>
                 Identity
-              </span>
+              </h2>
               <p className={TEXT_STYLES.BODY}>好奇心旺盛で、食わず嫌いをしない性格です。</p>
             </div>
             
@@ -175,11 +175,12 @@ export default function ProfilePage() {
                 <button
                   key={item.id}
                   onClick={() => setSelectedItem(item)}
+                  aria-haspopup="dialog"
                   className="group px-[13px] py-[8px] md:px-[21px] md:py-[8px] bg-[#EEF0F2] hover:bg-[#E4E4E7] rounded-full text-[#333] flex items-center gap-[4px] md:gap-[8px] transition-colors duration-200"
                 >
-                  <span className="text-[12px] md:text-[14px]">{item.emoji}</span>
+                  <span className="text-[12px] md:text-[14px]" aria-hidden="true">{item.emoji}</span>
                   <span className="font-bold font-noto text-[10px] md:text-[12px] tracking-wide">{item.title}</span>
-                  <span className="opacity-40 text-[10px] md:text-[12px] transition-transform duration-300 group-hover:rotate-90">
+                  <span className="opacity-40 text-[10px] md:text-[12px] transition-transform duration-300 group-hover:rotate-90" aria-hidden="true">
                     +
                   </span>
                 </button>
@@ -219,6 +220,9 @@ export default function ProfilePage() {
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-modal-overlay" />
           
           <div 
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="identity-modal-title"
             className="relative w-full max-w-[500px] bg-white rounded-[12px] md:rounded-[16px] px-6 pb-8 md:px-8 md:pb-10 shadow-2xl animate-modal-content"
             style={{ paddingTop: "28px" }}
             onClick={(e) => e.stopPropagation()}
@@ -226,9 +230,10 @@ export default function ProfilePage() {
             <div className="flex justify-end items-center mb-6 md:mb-8">
               <button
                 onClick={handleClose}
+                aria-label="閉じる"
                 className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full text-black/40 hover:text-black transition-colors"
               >
-                <span className="text-xl leading-none font-light">✕</span>
+                <span className="text-xl leading-none font-light" aria-hidden="true">✕</span>
               </button>
             </div>
 
@@ -247,8 +252,8 @@ export default function ProfilePage() {
               )}
 
               <div className="w-full max-w-[280px] md:max-w-[320px]">
-                <h3 className={modalTitleClass}>
-                  <span className="mr-2">{selectedItem.emoji}</span>
+                <h3 id="identity-modal-title" className={modalTitleClass}>
+                  <span className="mr-2" aria-hidden="true">{selectedItem.emoji}</span>
                   {selectedItem.title}
                 </h3>
                 <p className={modalBodyClass}>
@@ -260,7 +265,7 @@ export default function ProfilePage() {
             <div className="flex justify-between items-center w-full min-h-[32px]">
               {currentIndex > 0 ? (
                 <button onClick={handlePrev} className={modalNavButtonClass}>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                   </svg>
                   PREV
@@ -271,7 +276,7 @@ export default function ProfilePage() {
               {currentIndex < aboutItems.length - 1 ? (
                 <button onClick={handleNext} className={modalNavButtonClass}>
                   NEXT
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                   </svg>
                 </button>

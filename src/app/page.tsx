@@ -260,6 +260,7 @@ export default function Home() {
                 // ★ここが重要: インジケーターの色をテーマカラーに連動
                 style={{ backgroundColor: textColor }}
                 aria-label={`Go to ${work.title}`}
+                aria-current={index === currentIndex ? "true" : undefined}
               />
             ))}
           </div>
@@ -302,9 +303,9 @@ export default function Home() {
             </Link>
 
             <div className="break-words">
-              <h2 className="font-inter text-[32px] leading-[1.05] font-bold mb-6">
+              <h1 className="font-inter text-[32px] leading-[1.05] font-bold mb-6">
                 {currentWork.title}
-              </h2>
+              </h1>
 
               <div className="font-inter text-[12px] opacity-60 mb-4 tracking-[0.02em]">
                 {currentWork.category} | {currentWork.year}

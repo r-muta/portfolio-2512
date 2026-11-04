@@ -1,4 +1,9 @@
+import type { Metadata } from "next";
 import { GlobalHeader } from "@/components/GlobalHeader";
+
+export const metadata: Metadata = {
+  title: "404 Page Not Found",
+};
 
 export default function NotFound() {
   return (
